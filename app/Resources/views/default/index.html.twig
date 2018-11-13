@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %} 
+{% block main %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Supermarket</h5>
+    <!-- <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="#">Features</a>
+                <a class="p-2 text-dark" href="#">Enterprise</a>
+                <a class="p-2 text-dark" href="#">Support</a>
+                <a class="p-2 text-dark" href="#">Pricing</a>
+            </nav> -->
+    <nav class="my-2 my-md-0 mr-md-3"></nav>
+    <a class="btn btn-outline-primary" href="#">Ver carrito
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+    <a class="btn btn-success" style="margin-left: 1%" href="{{ path('login') }}">Iniciar Sesion</a>
+    </nav>
+</div>
+<div class="album py-5">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/pepitos.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Galletitas Pepitos 118g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$15</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/rumba.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Galletitas Rumba 112g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$15</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/oreo.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Galletitas Oreo 112g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$20</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/sonrisas.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Galletitas Sonrisas 118g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$15</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/surtidas_bagley.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Surtido Galletitas Bagley 400g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$40</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{{ asset('assets/images/uploads/chocolinas.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <p class="card-text">Galletitas Chocolinas 250g</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">$45</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
