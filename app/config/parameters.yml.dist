@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    api.stock.url: 'http://localhost/dssd/stock_api/web/'
+    api.rrhh.url: 'http://localhost/dssd/rrhh_api/web/'

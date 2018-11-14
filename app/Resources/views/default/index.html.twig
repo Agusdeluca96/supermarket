@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %} 
+{% extends 'base.html.twig' %}
 {% block main %}
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Supermarket</h5>
@@ -19,102 +19,24 @@
     <div class="container">
 
         <div class="row">
+            {% for product in products %}
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/pepitos.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                    <img class="card-img-top" src="{{ asset(product.img_url) }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
                     <div class="card-body">
-                        <p class="card-text">Galletitas Pepitos 118g</p>
+                        <p class="card-text">{{ product.product_type.description }} {{ product.name }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </div>
-                            <small class="text-muted">$15</small>
+                            <small class="text-muted">${{ product.sale_price }}</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/rumba.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Galletitas Rumba 112g</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">$15</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/oreo.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Galletitas Oreo 112g</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">$20</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/sonrisas.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Galletitas Sonrisas 118g</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">$15</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/surtidas_bagley.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Surtido Galletitas Bagley 400g</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">$40</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="{{ asset('assets/images/uploads/chocolinas.jpg') }}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Galletitas Chocolinas 250g</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">$45</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
