@@ -21,7 +21,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request, StockApiService $stockApi)
     {
-        $products = $stockApi->getProducts()['data'];
+        if ($this->getUser() != null) {
+            $employee = "true";
+        } else {
+            $employee = "false";            
+        }
+        $products = $stockApi->getProducts($employee)['data'];
         return $this->render('default/index.html.twig', [
             'products' => $products
         ]);

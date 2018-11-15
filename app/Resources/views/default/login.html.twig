@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+{% endblock %}
 {% block main %}
     <body class="text-center">
         <form action="{{ path('login') }}" method="post" class="form-signin">
@@ -6,7 +10,9 @@
             <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
 
             {% if error %}
-            <div class="text-danger small mb-2">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger" role="alert">
+                Usuario o contraseña invalida.
+            </div>
             {% endif %}
             <label for="inputEmail" class="sr-only">Correo electrónico</label>
             <input name="_username" type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required="" autofocus="" value="{{ last_username }}">
@@ -19,7 +25,4 @@
         </form>
     </body>
 {% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
-{% endblock %}
+
