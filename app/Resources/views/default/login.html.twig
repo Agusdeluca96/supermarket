@@ -1,14 +1,19 @@
-{% extends 'base.html.twig' %} 
-{% block body %}
+{% extends 'base.html.twig' %}
+{% block main %}
     <body class="text-center">
-        <form class="form-signin">
+        <form action="{{ path('login') }}" method="post" class="form-signin">
             <img class="mb-4" src="{{ asset('assets/images/uploads/image_login.png') }}" alt="Login" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
-            <label for="inputUsername" class="sr-only">Usuario</label>
-            <input type="username" id="inputUsername" class="form-control" placeholder="Usuario" required="" autofocus="">
+
+            {% if error %}
+            <div class="text-danger small mb-2">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <label for="inputEmail" class="sr-only">Correo electrónico</label>
+            <input name="_username" type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required="" autofocus="" value="{{ last_username }}">
             <label for="inputPassword" class="sr-only">Contraseña</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
+            <input name="_password" type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
             <br>
+            <input type="hidden" name="_target_path" value="/" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
             <p class="mt-5 mb-3 text-muted">© Grupo 16 - Sistemas Distribuidos</p>
         </form>

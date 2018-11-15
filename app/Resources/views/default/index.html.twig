@@ -22,7 +22,11 @@
         <a class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" href="">Ver carrito
             <i class="fas fa-shopping-cart"></i>
         </a>
+        {% if is_granted('ROLE_EMPLOYEE') %}
+        <a class="btn btn-outline-success" style="margin-left: 1%" href="{{ path('logout') }}">Cerrar Sesion</a>
+        {% else %}
         <a class="btn btn-outline-success" style="margin-left: 1%" href="{{ path('login') }}">Iniciar Sesion</a>
+        {% endif %}
     </div>
 </nav>
 

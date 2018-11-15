@@ -4,10 +4,15 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 use AppBundle\Service\StockApiService;
 use AppBundle\Service\RrhhApiService;
+use AppBundle\Security\WebserviceUser;
 
 class DefaultController extends Controller
 {
@@ -25,17 +30,21 @@ class DefaultController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         // replace this example code with whatever you need
-        return $this->render('default/login.html.twig', []);
+        return $this->render('default/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ]);
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/logout", name="logout")
      */
-    public function testAction(Request $request, RrhhApiService $rrhhApi)
+    public function logoutAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        dump($rrhhApi->checkEmployeeCredentials('agusdeluca96@gmail.com', 'puntito'));die;
     }
 }

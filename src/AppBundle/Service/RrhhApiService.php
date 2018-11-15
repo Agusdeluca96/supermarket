@@ -25,8 +25,8 @@ class RrhhApiService
         return $curl;
     }
 
-    public function checkEmployeeCredentials($email, $password) {
-        $curl = $this->curl("employee/find", ["email" => $email, "password" => $password]);
+    public function getEmployeeByUsername($email) {
+        $curl = $this->curl("employee/find", ["email" => $email]);
         $response = curl_exec($curl);
         $err = curl_error($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
