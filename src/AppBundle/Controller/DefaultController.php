@@ -33,7 +33,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/login", name="login", options={"expose"=true})
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
@@ -51,5 +51,13 @@ class DefaultController extends Controller
      */
     public function logoutAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
+    }
+
+    /**
+     * @Route("/buy/{product}/{coupon}", name="buy", options={"expose"=true})
+     */
+    public function buyAction($product, $coupon)
+    {
+        var_dump("Producto: " . $product . ", Coupon: " . $coupon);die;
     }
 }

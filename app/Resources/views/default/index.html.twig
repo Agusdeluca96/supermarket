@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %} 
+{% block stylesheets %} 
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}"> 
+{% endblock %}
 {% block main %}
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">Super Market</a>
@@ -8,21 +12,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li> -->
             </ul>
-            <a class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" href="">Ver carrito
-                <i class="fas fa-shopping-cart"></i>
-            </a>
             {% if is_granted('ROLE_EMPLOYEE') %}
             <a class="btn btn-outline-danger" style="margin-left: 1%" href="{{ path('logout') }}">Cerrar Sesion</a>
             {% else %}
@@ -42,11 +32,18 @@
                             <p class="card-text">{{ product.name }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary">Agregar al carrito
-                                        <i class="fas fa-cart-plus"></i>
+                                    {% if is_granted('ROLE_EMPLOYEE') %}
+                                    <a class="btn btn-sm btn-outline-primary" href="{{ path('buy', { 'product': product.id, 'coupon': '0' }) }}">Comprar
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                    {% else %}
+                                    {% include 'default/modal_coupon.html.twig' %}
+                                    <button type="button" class="btn btn-sm btn-outline-primary buttonComprar" data-toggle="modal" data-target="#exampleModalCenter" href="" id="{{ product.id }}" id>Comprar
+                                        <i class="fas fa-shopping-cart"></i>
                                     </button>
+                                    {% endif %}
                                 </div>
-                                <small class="text-muted">${{ product.sale_price }}</small>
+                                <small class="text-muted">Precio lista: ${{ product.sale_price }}</small>
                             </div>
                         </div>
                     </div>
@@ -55,78 +52,8 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Mi Carrito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Subtotal</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Galletitas Pepitos 118g</td>
-                                    <td>5</td>
-                                    <td>$75</td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Galletitas Bagley 112g</td>
-                                    <td>5</td>
-                                    <td>$75</td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Surtido Galletitas Bagley 400g</td>
-                                    <td>2</td>
-                                    <td>$80</td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Total</th>
-                                    <td></td>
-                                    <th>$230</th>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Comprar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %} 
-{% block stylesheets %} 
+{% block javascripts %} 
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}"> 
+    <script src="{{ asset('assets/js/index.js') }}"></script>
 {% endblock %}
