@@ -1,3 +1,8 @@
 .table td .table th {
     text-align: center !important;
 }
+
+.priceAndStock {
+    list-style-type: none;
+    padding-top: 5%;
+}

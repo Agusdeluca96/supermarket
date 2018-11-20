@@ -43,7 +43,14 @@
                                     </button>
                                     {% endif %}
                                 </div>
-                                <small class="text-muted">Precio lista: ${{ product.sale_price }}</small>
+                                <ul class="priceAndStock">
+                                    <li>
+                                        <small class="text-muted"><b>Stock:</b> {{ product.quantity }}</small>
+                                    </li>
+                                    <li>
+                                        <small class="text-muted"><b>Precio lista:</b> ${{ product.sale_price }}</small>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
