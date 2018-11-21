@@ -37,3 +37,7 @@ services:
     AppBundle\Service\RrhhApiService:
         arguments:
             $urlRrhhApi: '%api.rrhh.url%'
+
+    AppBundle\Service\BonitaApiService:
+        arguments:
+            $urlBonitaApi: '%api.bonita.url%'

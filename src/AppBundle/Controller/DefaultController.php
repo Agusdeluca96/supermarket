@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 use AppBundle\Service\StockApiService;
 use AppBundle\Service\RrhhApiService;
+use AppBundle\Service\BonitaApiService;
 use AppBundle\Security\WebserviceUser;
 
 class DefaultController extends Controller
@@ -56,8 +57,8 @@ class DefaultController extends Controller
     /**
      * @Route("/buy/{product}/{coupon}", name="buy", options={"expose"=true})
      */
-    public function buyAction($product, $coupon)
+    public function buyAction($product, $coupon, BonitaApiService $bonitaApi)
     {
-        var_dump("Producto: " . $product . ", Coupon: " . $coupon);die;
+        var_dump($bonitaApi->getProcess()['data']);die;
     }
 }
