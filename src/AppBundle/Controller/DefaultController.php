@@ -59,6 +59,7 @@ class DefaultController extends Controller
      */
     public function buyAction($product, $coupon, BonitaApiService $bonitaApi)
     {
-        var_dump($bonitaApi->getProcessId()['data']);die;
+        $variables = [['name' => 'productoId', 'value' => $product], ['name' => 'empleadoId', 'value' => 0], ['name' => 'cupon', 'value' => $coupon]];
+        var_dump($bonitaApi->getCaseId($variables));die;
     }
 }
