@@ -59,7 +59,9 @@ class DefaultController extends Controller
      */
     public function buyAction($product, $coupon, BonitaApiService $bonitaApi)
     {
+        $this->getUser()->setBonitaToken($bonitaApi->login());
         $variables = [['name' => 'productoId', 'value' => $product], ['name' => 'empleadoId', 'value' => 0], ['name' => 'cupon', 'value' => $coupon]];
-        var_dump($bonitaApi->getCaseId($variables));die;
+        var_dump($bonitaApi->getCaseId($this->getUser()->getBonitaToken(), $variables));die;
+        // $this->getUser()->setCaseId($bonitaApi->getCaseId($variables));
     }
 }
