@@ -41,3 +41,7 @@ services:
     AppBundle\Service\BonitaApiService:
         arguments:
             $urlBonitaApi: '%api.bonita.url%'
+
+    bonita.client:
+       alias: eight_points_guzzle.client.bonita_api
+       public: true
