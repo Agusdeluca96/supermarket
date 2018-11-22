@@ -1,5 +1,6 @@
 $("#confirmCoupon").click(function () {
-    Routing.generate('buy', { 'product': $("#confirmCoupon").data().id, 'coupon': $("#inputCoupon").val()});
+    var coupon = (($("#inputCoupon").val() != '') ? $("#inputCoupon").val()  : 0);
+    window.location.href = Routing.generate('buy', { 'product': $("#confirmCoupon").data().id, 'coupon': coupon});
 });
 
 $(".buttonComprar").click(function () {
