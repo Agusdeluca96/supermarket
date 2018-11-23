@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} 
 {% block stylesheets %} 
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('assets/css/buy_confirmation.css') }}"> 
 {% endblock %} 
 {% block main %}
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -21,13 +21,26 @@
         </div>
     </nav>
 
+    
     <div class="container" style="margin-top: 5%;">
+        {% if cuponValido == 'false' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Cupón inválido!</strong> Cancelá la compra y volvé a realizarla utilizando un cupón válido para acceder al descuento por cupón!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
         <div class="jumbotron" style="padding-top: 2% !important; padding-bottom: 2% !important;">
             <h2>{{ product.name }}</h2>
             <img src="{{ asset(product.img_url) }}" class="img-fluid" alt="Responsive image" style="margin-top: 2%; margin-bottom: 2%;">
-            <h5><b>Precio lista: </b>$ {{ product.sale_price }}</h5>
-            <h5><b>Precio final: </b>$ {{ finalPrice }}</h5>
-            <div style="display: flex;justify-content: center;">
+            <div class="text-center">
+                <h5><b>Precio lista: </b><span style="color:red">${{ product.sale_price }}</span></h5>
+                <h5><b>Descuento: </b><span style="color:green">-${{ product.sale_price - finalPrice }}</span></h5>
+                <h5><b>Precio final: </b>${{ finalPrice }}</h5>
+            </div>
+            <br>
+            <div style="display: flex; justify-content: center;">
                 <button type="button" class="btn btn-danger btn-sm confirmationButton" id="cancel">Cancelar</button>
                 &nbsp;
                 <button type="button" class="btn btn-success btn-sm confirmationButton" id="accept">Confirmar</button>        

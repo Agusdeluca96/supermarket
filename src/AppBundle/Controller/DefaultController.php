@@ -21,7 +21,7 @@ class DefaultController extends Controller
         } else {
             $employee = "false";
         }
-        $products = $stockApi->getProducts($employee)['data'];
+        $products = $stockApi->getProductsAvailables($employee)['data'];
         return $this->render('default/index.html.twig', [
             'products' => $products,
         ]);
@@ -96,16 +96,18 @@ class DefaultController extends Controller
         do {
             $finalPrice = $bonitaApi->getCaseVariable('precioTotal');
         } while ($finalPrice == '0.0');
-
-        return $this->renderBuyConfirmation($request, $stockApi, $product, $finalPrice);
+       
+        $cuponValido = $bonitaApi->getCaseVariable('cuponValido');
+        return $this->renderBuyConfirmation($request, $stockApi, $product, $finalPrice, $cuponValido);
     }
 
-    public function renderBuyConfirmation(Request $request, StockApiService $stockApi, $id, $finalPrice) 
+    public function renderBuyConfirmation(Request $request, StockApiService $stockApi, $id, $finalPrice, $cuponValido) 
     {
         $product = $stockApi->getProduct($id)['data'];
         return $this->render('default/buy_confirmation.html.twig', [
             'product' => $product,
-            'finalPrice' => (int) $finalPrice
+            'finalPrice' => (int) $finalPrice,
+            'cuponValido' => $cuponValido
         ]);
 
     }
