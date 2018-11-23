@@ -1,0 +1,25 @@
+.container {
+    margin-top: 5%;
+}
+
+.jumbotron {
+    padding-top: 2% !important; 
+    padding-bottom: 2% !important;
+}
+
+.productImg {
+    margin-top: 2%; margin-bottom: 2%;
+}
+
+#salePrice {
+    color:red;
+}
+
+#discount {
+    color:green;
+}
+
+.confirmationButtons {
+    display: flex; 
+    justify-content: center;
+}

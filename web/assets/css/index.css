@@ -6,3 +6,13 @@
     list-style-type: none;
     padding-top: 5%;
 }
+
+.productImg {
+    height: 225px; 
+    width: 100%; 
+    display: block;
+}
+
+.container {
+    margin-top: 2%;
+}
