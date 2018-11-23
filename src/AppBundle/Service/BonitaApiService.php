@@ -203,4 +203,27 @@ class BonitaApiService
         $tasks = json_decode($body);
         return $tasks[0]->{'id'};
     }
+
+    public function getFinishedCaseState(){
+        $client = $this->container->get('bonita.client');
+        $session = $this->container->get('session');
+        $token = $session->get('bonitaToken');
+        $caseId = $session->get('caseId');
+        do {
+            $response = $client->request(
+                'GET', 
+                "bonita/API/bpm/archivedCase?o=id&f=sourceObjectId=$caseId",
+                [
+                    'headers' =>
+                    [
+                        'X-Bonita-API-Token' => $token
+                    ]
+                ]
+            );
+            $body = $response->getBody();
+            $case = json_decode($body);
+        } while (count($case) == 0);
+
+        return $case[0]->{'state'};
+    }
 }

@@ -93,10 +93,9 @@ class DefaultController extends Controller
         $assignedId = $bonitaApi->getAssignedId();
         $request->getSession()->set('assignedId', $assignedId);
 
-        $finalPrice = $bonitaApi->getCaseVariable('precioTotal');
-        while ($finalPrice == '0.0') {
+        do {
             $finalPrice = $bonitaApi->getCaseVariable('precioTotal');
-        }
+        } while ($finalPrice == '0.0');
 
         return $this->renderBuyConfirmation($request, $stockApi, $product, $finalPrice);
     }
@@ -104,7 +103,6 @@ class DefaultController extends Controller
     public function renderBuyConfirmation(Request $request, StockApiService $stockApi, $id, $finalPrice) 
     {
         $product = $stockApi->getProduct($id)['data'];
-        // var_dump($product);die;
         return $this->render('default/buy_confirmation.html.twig', [
             'product' => $product,
             'finalPrice' => (int) $finalPrice
@@ -116,7 +114,7 @@ class DefaultController extends Controller
      * @Route("/buyConfirmation/{value}", name="buyConfirmation", options={"expose"=true})
      */
     public function buyConfirmationAction(Request $request, $value, BonitaApiService $bonitaApi, StockApiService $stockApi)
-    {
+    {        
         // Recupero el token de la API de bonita y lo asigno a una variable de la sesion
         $bonitaToken = $bonitaApi->login();
         $request->getSession()->set('bonitaToken', $bonitaToken);
@@ -124,17 +122,18 @@ class DefaultController extends Controller
         // Me guardo el id de la tarea manual que freno el proceso en una variable de la sesion
         $confirmationTaskId = $bonitaApi->getActualTaskId();
         $request->getSession()->set('confirmationTaskId', $confirmationTaskId);
-        
+
         if ($value == 'accept') {
+            // Cambio el estado de la variable del proceso de bonita que espera confirmacion a `true`
             $bonitaApi->setCaseVariable('confirmacionCompra', 'java.lang.Boolean', 'true');
+
+            // Pongo la tarea que esperaba la confirmacion del usuario como completada
             $bonitaApi->setTaskState('completed');
-            $processState = $bonitaApi->getProcessState();
-            var_dump($processState);die;
-            while ($processState != 'RESOLVED') {
-                $processState = $bonitaApi->getProcessState();
-            }
+
+            // Recupero el estado devuelvo por el caso cuando llega a finalizado, donde este metodo espera a que llegue a ese estado
+            $caseState = $bonitaApi->getFinishedCaseState();
         } else {
-            var_dump("cancelo");die;
+            $bonitaApi->setTaskState('completed');
         }
 
         return $this->redirectToRoute('homepage');
