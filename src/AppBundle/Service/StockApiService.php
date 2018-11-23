@@ -26,8 +26,15 @@ class StockApiService
     }
 
     public function getProducts($employee = "false") {
-        // $curl = $this->curl("product/adaptedPrice", ["employee" => $employee]);
         $curl = $this->curl("product", []);
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        return ['data' => json_decode($response, false), 'code' => $code];
+    }
+
+    public function getProduct($id) {
+        $curl = $this->curl("product/$id", []);
         $response = curl_exec($curl);
         $err = curl_error($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);

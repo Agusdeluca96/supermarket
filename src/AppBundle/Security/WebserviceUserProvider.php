@@ -48,7 +48,7 @@ class WebserviceUserProvider implements UserProviderInterface
         // pretend it returns an array on success, false if there is no user
         if ($response["code"] == 200) {
             $data = $response["data"];
-            return new WebserviceUser($data->email, $data->password, $data->firstname, $data->surname, ["ROLE_EMPLOYEE"]);
+            return new WebserviceUser($data->id, $data->email, $data->password, $data->firstname, $data->surname, ["ROLE_EMPLOYEE"]);
         }
 
         throw new UsernameNotFoundException(

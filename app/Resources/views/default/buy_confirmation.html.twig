@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %} 
+{% block stylesheets %} 
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}"> 
+{% endblock %} 
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Super Market</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            {% if is_granted('ROLE_EMPLOYEE') %}
+            <a class="btn btn-outline-danger" style="margin-left: 1%" href="{{ path('logout') }}">Cerrar Sesion</a>
+            {% else %}
+            <a class="btn btn-outline-success" style="margin-left: 1%" href="{{ path('login') }}">Iniciar Sesion</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 5%;">
+        <div class="jumbotron" style="padding-top: 2% !important; padding-bottom: 2% !important;">
+            <h2>{{ product.name }}</h2>
+            <img src="{{ asset(product.img_url) }}" class="img-fluid" alt="Responsive image" style="margin-top: 2%; margin-bottom: 2%;">
+            <h5><b>Precio lista: </b>$ {{ product.sale_price }}</h5>
+            <h5><b>Precio final: </b>$ {{ finalPrice }}</h5>
+            <div style="display: flex;justify-content: center;">
+                <button type="button" class="btn btn-danger btn-sm confirmationButton" id="cancel">Cancelar</button>
+                &nbsp;
+                <button type="button" class="btn btn-success btn-sm confirmationButton" id="accept">Confirmar</button>        
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %} 
+    {{ parent() }}
+    <script src="{{ asset('assets/js/buy_confirmation.js') }}"></script>
+{% endblock %}

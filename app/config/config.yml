@@ -95,8 +95,8 @@ eight_points_guzzle:
                 #     - acme     # login
                 #     - pa55w0rd # password
                 #
-                # headers:
-                #     Accept: "application/json"
+                headers:
+                    Accept: "application/json"
 
                 # Find proper php const, for example CURLOPT_SSLVERSION, remove CURLOPT_ and transform to lower case.
                 # List of curl options: http://php.net/manual/en/function.curl-setopt.php

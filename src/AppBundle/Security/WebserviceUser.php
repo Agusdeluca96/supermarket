@@ -7,14 +7,16 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 
 class WebserviceUser implements UserInterface, EquatableInterface
 {
+    private $id;
     private $username;
     private $password;
     private $firstname;
     private $surname;
     private $roles;
 
-    public function __construct($username, $password, $firstname, $surname, array $roles)
+    public function __construct($id, $username, $password, $firstname, $surname, array $roles)
     {
+        $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->firstname = $firstname;
@@ -25,6 +27,11 @@ class WebserviceUser implements UserInterface, EquatableInterface
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getPassword()
